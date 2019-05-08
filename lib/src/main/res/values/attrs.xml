@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VerificationCodeEditText">
+        <attr name="strokeLength" format="integer" />
+        <attr name="strokeBoxWidth" format="dimension" />
+        <attr name="strokeBoxHeight" format="dimension" />
+        <attr name="strokePadding" format="dimension" />
+        <attr name="strokeNormalColor" format="color"/>
+        <attr name="strokeSelectColor" format="color"/>
+        <attr name="strokeRadius" format="dimension"/>
+        <attr name="strokeWidth" format="dimension"/>
+        <attr name="strokeBoxNormalBgColor" format="color"/>
+        <attr name="strokeBoxSelectBgColor" format="color"/>
+    </declare-styleable>
+</resources>
