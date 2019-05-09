@@ -20,11 +20,11 @@
         app:strokeBoxNormalBgColor="#EEEEEE"
         app:strokeBoxSelectBgColor="#FFFFFF"
         app:strokeBoxWidth="46dp"
-        app:strokeLength="4"
+        app:strokeLength="6"
         app:strokeNormalColor="#EEEEEE"
         app:strokePadding="20dp"
         app:strokeRadius="4dp"
-        app:strokeSelectColor="#EEEEEE"
+        app:strokeSelectColor="#FF8247"
         app:strokeWidth="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,10 +7,18 @@ import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.text.InputFilter
 import android.util.AttributeSet
+import android.util.Log
+import android.view.KeyEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.AppCompatEditText
+import android.opengl.ETC1.getWidth
+import androidx.core.content.ContextCompat.getSystemService
+import android.view.WindowManager
 
-class VerificationCodeEditText(context: Context, attrs: AttributeSet) : AppCompatEditText(context, attrs) {
+
+
+class VerificationCodeEditText(context: Context, attrs: AttributeSet) : AppCompatEditText(context, attrs), View.OnFocusChangeListener{
     //文字颜色
     private var mTextColor: Int = 0
     // 输入的最大长度
@@ -41,6 +49,7 @@ class VerificationCodeEditText(context: Context, attrs: AttributeSet) : AppCompa
     private val mBgSelectColors = IntArray(2)
     //未选中背景颜色
     private val mBgNormalColors = IntArray(2)
+    private val mContext = context
 
     interface OnTextFinishListener {
         fun onTextFinish(text: CharSequence, length: Int)
@@ -92,6 +101,13 @@ class VerificationCodeEditText(context: Context, attrs: AttributeSet) : AppCompa
         isCursorVisible = false
         // 取消长按事件
         isLongClickable = false
+        //获取焦点监听
+        onFocusChangeListener = this
+    }
+
+    override fun onFocusChange(v: View?, hasFocus: Boolean) {
+        if (hasFocus)
+            (v as AppCompatEditText).setSelection(this.text!!.length)
     }
 
     override fun onTextContextMenuItem(id: Int): Boolean {
@@ -121,9 +137,20 @@ class VerificationCodeEditText(context: Context, attrs: AttributeSet) : AppCompa
         }
         // 判断高度是否小于推荐宽度
         val recommendWidth = mStrokeBoxWidth * mMaxLength + mStrokePadding * (mMaxLength - 1)
+        //屏幕宽度
+        val screenWidth = mContext.resources.displayMetrics.widthPixels
+
+        if(screenWidth < recommendWidth){
+            Log.e("Layout Error","大小超过屏幕宽度，将显示不全！")
+        }
+
         if (width < recommendWidth) {
             width = recommendWidth
         }
+
+        Log.d("width",width.toString())
+        Log.d("recommendWidth",recommendWidth.toString())
+        Log.d("screenWidth",screenWidth.toString())
         widthMeasureSpec = MeasureSpec.makeMeasureSpec(width, widthMode)
         heightMeasureSpec = MeasureSpec.makeMeasureSpec(height, heightMode)
         setMeasuredDimension(widthMeasureSpec, heightMeasureSpec)
@@ -132,7 +159,6 @@ class VerificationCodeEditText(context: Context, attrs: AttributeSet) : AppCompa
     override fun onDraw(canvas: Canvas) {
         mTextColor = currentTextColor
         setTextColor(Color.TRANSPARENT)
-        super.onDraw(canvas)
         setTextColor(mTextColor)
         // 重绘背景颜色
         drawStrokeBackground(canvas)
@@ -173,6 +199,11 @@ class VerificationCodeEditText(context: Context, attrs: AttributeSet) : AppCompa
             bounds = mRect
             draw(canvas)
         }
+    }
+
+    override fun onSelectionChanged(selStart: Int, selEnd: Int) {
+        super.onSelectionChanged(selStart, selEnd)
+        if (selStart == selEnd) setSelection(text!!.length)//光标只能在最后边
     }
 
     //重绘文本
