@@ -20,7 +20,7 @@
         app:strokeBoxNormalBgColor="#EEEEEE"
         app:strokeBoxSelectBgColor="#FFFFFF"
         app:strokeBoxWidth="46dp"
-        app:strokeLength="6"
+        app:strokeLength="4"
         app:strokeNormalColor="#EEEEEE"
         app:strokePadding="20dp"
         app:strokeRadius="4dp"
