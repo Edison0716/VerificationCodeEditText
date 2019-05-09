@@ -141,6 +141,7 @@ class VerificationCodeEditText(context: Context, attrs: AttributeSet) : AppCompa
         val screenWidth = mContext.resources.displayMetrics.widthPixels
 
         if(screenWidth < recommendWidth){
+            //todo 解决适配问题
             Log.e("Layout Error","大小超过屏幕宽度，将显示不全！")
         }
 
