@@ -8,14 +8,9 @@ import android.graphics.drawable.GradientDrawable
 import android.text.InputFilter
 import android.util.AttributeSet
 import android.util.Log
-import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.AppCompatEditText
-import android.opengl.ETC1.getWidth
-import androidx.core.content.ContextCompat.getSystemService
-import android.view.WindowManager
-
 
 
 class VerificationCodeEditText(context: Context, attrs: AttributeSet) : AppCompatEditText(context, attrs), View.OnFocusChangeListener{
